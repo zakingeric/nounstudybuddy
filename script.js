@@ -69,10 +69,10 @@ async function generateSmartPodcast() {
   processText.textContent = 'Generating smart podcast using DeepSeek...';
 
   try {
-    const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+    const response = await fetch('https://api.deepseek.com/v1/chat/completions', {
       method: 'POST',
       headers: {
-        'Authorization': 'Bearer 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',
+        'Authorization': 'Bearer sk-8686f6e5d794407c84cccebe1235f476',
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
@@ -89,9 +89,9 @@ async function generateSmartPodcast() {
     if (data.choices && data.choices[0] && data.choices[0].message) {
       scriptArea.value = data.choices[0].message.content.trim();
       processBar.style.width = '100%';
-      processText.textContent = '✅ Smart Podcast Generated!';
+      processText.textContent = '✅ Smart Podcast Generated (DeepSeek)!';
     } else {
-      scriptArea.value = '⚠️ No valid response from AI.';
+      scriptArea.value = '⚠️ No valid response from DeepSeek.';
       processText.textContent = '❌ Podcast generation failed.';
     }
 
