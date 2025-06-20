@@ -66,15 +66,12 @@ async function generateSmartPodcast() {
   }
 
   processBar.style.width = '10%';
-  processText.textContent = 'Generating smart podcast using DeepSeek...';
+  processText.textContent = 'Generating smart podcast...';
 
   try {
-    const response = await fetch('https://api.deepseek.com/v1/chat/completions', {
+    const response = await fetch("https://deepseek-proxy-9zap.onrender.com/generate", {
       method: 'POST',
-      headers: {
-        'Authorization': 'Bearer sk-8686f6e5d794407c84cccebe1235f476',
-        'Content-Type': 'application/json'
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         model: 'deepseek-chat',
         messages: [
@@ -89,9 +86,9 @@ async function generateSmartPodcast() {
     if (data.choices && data.choices[0] && data.choices[0].message) {
       scriptArea.value = data.choices[0].message.content.trim();
       processBar.style.width = '100%';
-      processText.textContent = '✅ Smart Podcast Generated (DeepSeek)!';
+      processText.textContent = '✅ Smart Podcast Generated!';
     } else {
-      scriptArea.value = '⚠️ No valid response from DeepSeek.';
+      scriptArea.value = '⚠️ No valid response from AI.';
       processText.textContent = '❌ Podcast generation failed.';
     }
 
@@ -111,4 +108,4 @@ function generateSummary() {
     .join('\n');
 
   summaryArea.value = summary;
-}
+      }
