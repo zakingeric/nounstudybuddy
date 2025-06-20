@@ -6,7 +6,6 @@ const processBar = document.getElementById('processBar');
 const uploadText = document.getElementById('uploadText');
 const processText = document.getElementById('processText');
 
-// When a file is selected
 fileInput.addEventListener('change', () => {
   const file = fileInput.files[0];
   if (file) {
@@ -18,7 +17,6 @@ fileInput.addEventListener('change', () => {
   }
 });
 
-// Read PDF and extract text
 async function processPDF() {
   const file = fileInput.files[0];
   if (!file) return alert('Please upload a PDF file first.');
@@ -48,7 +46,6 @@ async function processPDF() {
   reader.readAsArrayBuffer(file);
 }
 
-// Generate podcast-style script
 async function generateSmartPodcast() {
   const script = scriptArea.value.trim();
   if (!script) return alert('Extract PDF text first.');
@@ -60,18 +57,16 @@ async function generateSmartPodcast() {
 
   if (mode === 'eexam') {
     prompt = 'Read this material exactly word-for-word for E-exam preparation.';
+  } else if (style === 'gist') {
+    prompt = 'You are Ayo and Faith, two Nigerian students casually gisting and breaking this down:';
+  } else if (style === 'classroom') {
+    prompt = 'You are two Nigerian tutors explaining this clearly to fellow students:';
   } else {
-    if (style === 'gist') {
-      prompt = 'You are Ayo and Faith, two Nigerian students casually discussing this material:';
-    } else if (style === 'classroom') {
-      prompt = 'You are two friendly teachers explaining this clearly like in a classroom:';
-    } else {
-      prompt = 'Explain this in a formal and structured way for serious academic listeners.';
-    }
+    prompt = 'Explain this in a formal, academic tone for advanced learners.';
   }
 
   processBar.style.width = '10%';
-  processText.textContent = 'Generating smart podcast...';
+  processText.textContent = 'Generating smart podcast using DeepSeek...';
 
   try {
     const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
@@ -81,7 +76,7 @@ async function generateSmartPodcast() {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        model: 'mistralai/mistral-7b-instruct',
+        model: 'deepseek-chat',
         messages: [
           { role: 'system', content: prompt },
           { role: 'user', content: script }
@@ -94,20 +89,19 @@ async function generateSmartPodcast() {
     if (data.choices && data.choices[0] && data.choices[0].message) {
       scriptArea.value = data.choices[0].message.content.trim();
       processBar.style.width = '100%';
-      processText.textContent = '✅ Podcast generated successfully!';
+      processText.textContent = '✅ Smart Podcast Generated!';
     } else {
       scriptArea.value = '⚠️ No valid response from AI.';
-      processText.textContent = '❌ Podcast failed (empty response)';
+      processText.textContent = '❌ Podcast generation failed.';
     }
 
   } catch (error) {
-    console.error(error);
-    scriptArea.value = '❌ Error: ' + error.message;
+    console.error('Error:', error);
+    scriptArea.value = '❌ Network or API error: ' + error.message;
     processText.textContent = '❌ Failed to generate podcast.';
   }
 }
 
-// Generate summary points
 function generateSummary() {
   const lines = scriptArea.value.split(/\n|\.\s/);
   const summary = lines
