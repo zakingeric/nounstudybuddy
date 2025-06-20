@@ -1,0 +1,74 @@
+body {
+  background: #121212;
+  color: #f0f0f0;
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 1em;
+}
+.container {
+  max-width: 700px;
+  margin: auto;
+}
+.app-header h1 {
+  font-size: 2.5em;
+  color: #00e5ff;
+  text-align: center;
+  text-shadow: 0 2px 10px rgba(0,229,255,0.4);
+}
+.tagline {
+  text-align: center;
+  font-size: 1em;
+  color: #ccc;
+  margin-bottom: 1em;
+}
+.card {
+  background: #1f1f1f;
+  padding: 1em;
+  border-radius: 10px;
+  margin-bottom: 1em;
+  box-shadow: 0 0 12px rgba(0, 229, 255, 0.1);
+}
+input, select, textarea, button {
+  width: 100%;
+  padding: 0.8em;
+  margin-top: 0.7em;
+  border-radius: 6px;
+  border: none;
+  font-size: 1em;
+}
+input, select {
+  background: #292929;
+  color: #ccc;
+}
+textarea {
+  background: #1a1a1a;
+  color: #0f0;
+  font-family: monospace;
+  resize: vertical;
+  height: 200px;
+}
+button {
+  background: #00e5ff;
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 1em;
+  transition: background 0.3s ease;
+}
+button:hover {
+  background: #00bcd4;
+}
+.progress {
+  width: 100%;
+  background: #333;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-top: 10px;
+  height: 8px;
+}
+.bar {
+  height: 100%;
+  width: 0%;
+  background: #00e676;
+  transition: width 0.4s ease;
+}

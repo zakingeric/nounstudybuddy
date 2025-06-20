@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NOUN Study Buddy</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <header class="app-header">
+      <h1>NOUN Study Buddy</h1>
+      <p class="tagline">Your personal AI-powered course assistant 👨🏾‍💻🎧</p>
+    </header>
+
+    <section class="card">
+      <label>📄 Select Course Material (PDF only)</label>
+      <input type="file" id="fileInput" accept=".pdf" />
+      <div class="progress"><div class="bar" id="uploadBar"></div></div>
+      <p id="uploadText">Waiting for file...</p>
+
+      <label>📘 Exam Type</label>
+      <select id="examMode">
+        <option value="eexam">🎯 E-Exam (Strict)</option>
+        <option value="pop">📝 POP (Explain)</option>
+      </select>
+
+      <label>🎙️ Podcast Style</label>
+      <select id="style">
+        <option value="gist">💬 Gisting</option>
+        <option value="classroom">🏫 Classroom</option>
+        <option value="formal">📖 Formal</option>
+      </select>
+
+      <button onclick="processPDF()">Start Reading PDF</button>
+      <div class="progress"><div class="bar" id="processBar"></div></div>
+      <p id="processText">Progress: 0%</p>
+
+      <button onclick="generateSmartPodcast()">Generate Smart Podcast</button>
+    </section>
+
+    <section class="card">
+      <h2>🧠 Generated Script</h2>
+      <textarea id="scriptArea" readonly></textarea>
+    </section>
+
+    <section class="card">
+      <button onclick="generateSummary()">Generate Summary</button>
+      <h2>📄 Summary</h2>
+      <textarea id="summaryArea" readonly></textarea>
+    </section>
+
+    <footer style="text-align:center;color:gray;margin-top:1em;font-size:0.8em;">
+      Final Build — v1.0 (Powered by OpenRouter)
+    </footer>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@2.16.105/build/pdf.min.js"></script>
+  <script>
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@2.16.105/build/pdf.worker.min.js';
+  </script>
+  <script src="script.js"></script>
+</body>
+</html>
